@@ -5,7 +5,7 @@
 ## High-level interpretability & mechanistic overviews
 
 - **The Quest for the Right Mediator: A History, Survey, and Theoretical Grounding of Causal Interpretability** (Mueller et al., 2024) ([paper](https://arxiv.org/abs/2408.01416))
-  - Highlight: Provides a broad overview on the methodology of causal interpretability, as well as the pros and cons of different interpretability frameworks(e.g. feature learning vs circuit discovery).
+  - Highlight: Provides a broad overview on the methodology of causal interpretability, as well as the pros and cons of different interpretability frameworks (e.g. feature learning vs circuit discovery).
 
 - **A Practical Review of Mechanistic Interpretability for Transformer-Based Language Models** (Rai et al., 2024) ([paper](https://arxiv.org/abs/2407.02646))
   - Highlight: Good “field map” of methods of mechanistic interpretability for transformers: objects of study (features, circuits, SAEs), common techniques (patching, probing, SAEs), evaluation criteria, and a taxonomy of current work.
@@ -42,7 +42,7 @@
   - Highlight: Builds circuits over SAE features rather than neurons/heads, giving more monosemantic units and enabling edits like SHIFT (surgically removing spurious features).
     - For an application, see **Scaling Sparse Feature Circuits For Studying In-Context Learning** ([paper](https://arxiv.org/pdf/2504.13756))
 
-- **Transcoders Find Interpretable LLM Feature Circuits** (Dunefsky et al., 2024) ([paper] https://arxiv.org/abs/2406.11944)
+- **Transcoders Find Interpretable LLM Feature Circuits** (Dunefsky et al., 2024) ([paper] (https://arxiv.org/abs/2406.11944))
     - Highlight: Transcoders learn the latent features of an MLP layer, together with a transformed weight matrix that encodes how these features activate one another. This allows circuit identification without patching or pruning. 
     - see also: [Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html)
 
