@@ -1,35 +1,49 @@
+# Circuits Reading List 
 
+## Demonstrational Work on Circuits
+> Justifies the usefulness of circuits as they allow us to:
+> 1. visualise the behaviour of specific submodules that causally contribute to task efficacy, demystifying internal computation
+> 2. intervene on behaviours in surgical ways
 
-# Mechanistic Interpretability Reading List (Circuits-Focused)
+- [Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small](https://arxiv.org/abs/2211.00593)
+- [How Does GPT-2 Compute Greater-Than? Interpreting Mathematical Abilities in a Pre-Trained Language Model](https://arxiv.org/abs/2305.00586)
+- [Does Circuit Analysis Interpretability Scale? Evidence from Multiple Choice Capabilities in Chinchilla](https://arxiv.org/abs/2307.09458)
 
-## High-level interpretability & mechanistic overviews
+## Circuit Discovery Methods
 
+<<<<<<< HEAD
 - **The Quest for the Right Mediator: A History, Survey, and Theoretical Grounding of Causal Interpretability** (Mueller et al., 2024) ([paper](https://arxiv.org/abs/2408.01416))
   - Highlight: Provides a broad overview on the methodology of causal interpretability, as well as the pros and cons of different interpretability frameworks (e.g. feature learning vs circuit discovery).
+=======
+### Traditional Circuit Discovery
+>>>>>>> d348a9d (updated reading list)
 
-- **A Practical Review of Mechanistic Interpretability for Transformer-Based Language Models** (Rai et al., 2024) ([paper](https://arxiv.org/abs/2407.02646))
-  - Highlight: Good “field map” of methods of mechanistic interpretability for transformers: objects of study (features, circuits, SAEs), common techniques (patching, probing, SAEs), evaluation criteria, and a taxonomy of current work.
+- [Towards Automated Circuit Discovery for Mechanistic Interpretability (ACDC)](https://arxiv.org/abs/2304.14997)
 
-- **Transformer Circuits Thread (Anthropic)** ([index](https://transformer-circuits.pub))
-  - Highlight: Anthropic’s umbrella for circuits work (induction heads, toy models of superposition, etc.); historically important for the circuits mindset.
+- [Attribution Patching Outperforms Automated Circuit Discovery (EAP)](https://arxiv.org/abs/2310.10348)
+  - less accurate than activation patching, but faster
 
----
+- [Finding Transformer Circuits with Edge Pruning (Differential Masking)](https://arxiv.org/abs/2407.00886)
 
-## Circuit discovery methods
+### Sparse Autoencoder (SAE)-based Feature Circuits
+> Expresses the output of each submodule as a sparse combination of transformed directions in residual stream space (c.f. "feature")  
+> Sparsity allows us to interpret the output, and thus the function of each submodule, without needing to craft our own hypotheses
 
-### 1. Gradient / patching–based methods
+- [Sparse Feature Circuits: Discovering and Editing Interpretable Causal Graphs in Language Models](https://arxiv.org/abs/2403.19647)
+- Feature interpretability enables SHIFT, which surgically removes spurious features to improve circuit faithfulness.
+  - For an application, see [Scaling Sparse Feature Circuits For Studying In-Context Learning](https://arxiv.org/pdf/2504.13756)
 
-- **Towards Automated Circuit Discovery for Mechanistic Interpretability (ACDC)** (Conmy et al., 2023) ([paper](https://arxiv.org/abs/2304.14997))
-  - Highlight: Introduces a greedy edge-pruning algorithm that iteratively removes connections while using activation patching to obtain the minimal computational subgraph (circuit) that preserves model behavior.
+### Transcoders
+> Learns to decompose the MLP activations of a model into a set of sparse features, deriving *input-invariant* feature circuits.
 
-- **Attribution Patching Outperforms Automated Circuit Discovery** (Syed, Rager, Conmy, 2023) ([paper](https://arxiv.org/abs/2310.10348))
-  - Highlight: Relies on the gradient of the backward pass to identify influential edges for a certain task, reducing computational overhead relative to ACDC. However, linearisation can introduce error into importance estimates.
+- [Transcoders Find Interpretable LLM Feature Circuits](https://arxiv.org/abs/2406.11944)
 
-- **Position-aware Automatic Circuit Discovery** (Haklay et al., 2025) ([paper](https://arxiv.org/abs/2502.04577))
-  - Highlight: Extends attribution/ACDC-style methods to track *positional* roles, handling variable-length inputs and cross-position interactions.
+- [Transformer Circuits Thread - Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html)
 
-### 2. Pruning / masking–based methods
+### Sheaf Discovery: Combined Edge-Weight Pruning
+> Finds "sheaves" (edge & weight-pruned sets) with better task fidelity than traditional circuits.
 
+<<<<<<< HEAD
 - **Finding Transformer Circuits with Edge Pruning** (Bhaskar et al., 2024, NeurIPS) ([paper](https://arxiv.org/abs/2407.00886))
   - Highlight: Optimizes a mask of edges to identify a sparse circuit that optimally reproduces model behaviour at a given sparsity. 
 
@@ -47,94 +61,81 @@
     - see also: [Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html)
 
 ---
+=======
+- [Sheaf Discovery with Joint Computation Graph Pruning and Flexible Granularity](https://arxiv.org/pdf/2407.03779v2)
+>>>>>>> d348a9d (updated reading list)
 
 ## Faithfulness & critiques of circuit discovery
 
-- **Causal Scrubbing: A Method for Rigorously Testing Interpretability Hypotheses** (Chan et al., 2022, Alignment Forum) ([post](https://www.lesswrong.com/posts/JvZhhzycHu2Yd57RN/causal-scrubbing-a-method-for-rigorously-testing))
-  - Highlight: An early proposal to test faithfulness of circuits via mean ablating irrelevant paths.
+- [Transformer Circuit Faithfulness Metrics Are Not Robust](https://openreview.net/pdf?id=zSf8PJyQb2)
+  - Finds that faithfulness metrics are sensitive to small changes in ablation methodology and task setups, calling into question the generalizability of discovered circuits.
 
-- **Transformer Circuit Faithfulness Metrics Are Not Robust** (Miller et al., 2024, COLM) ([paper](https://openreview.net/pdf?id=zSf8PJyQb2))
-    - Highlight: Finds that faithfulness metrics are sensitive to small changes in ablation methodology and task setups, calling into question the generalizability of discovered circuits.
+- [Have Faith in Faithfulness: Going Beyond Circuit Overlap When Finding Model Mechanisms](https://arxiv.org/abs/2403.17806)
+  -Argues that high overlap between discovered circuits and “ground truth” paths is not enough; compares different ablation/patching-style faithfulness tests and shows they can disagree.
 
-- **Have Faith in Faithfulness: Going Beyond Circuit Overlap When Finding Model Mechanisms** (Hanna, 2024) ([paper](https://arxiv.org/abs/2403.17806))
-  - Highlight: Argues that high overlap between discovered circuits and “ground truth” paths is not enough; compares different ablation/patching-style faithfulness tests and shows they can disagree. 
+- [Rethinking Circuit Completeness in Language Models: AND, OR, and ADDER Gates](https://arxiv.org/abs/2505.10039)
+  - Treats circuits as compositions of logical gates and shows that common methods systematically miss OR-like structures, which are important for applications such as unlearning and can be guaranteed through finding complete circuits.
 
-- **Rethinking Circuit Completeness in Language Models: AND, OR, and ADDER Gates** (Chen et al., 2025, ICLR) ([paper](https://arxiv.org/abs/2505.10039))
-  - Highlight: Treats circuits as compositions of logical gates and shows that common methods systematically miss OR-like structures, which are important for applications such as unlearning and can be guaranteed through finding complete circuits. 
+## Phenomenon-specific breakdown of circuit studies
 
----
+Fine-tuning:
+- [Fine-Tuning Enhances Existing Mechanisms: A Case Study on Entity Tracking](https://arxiv.org/abs/2402.14811)
 
-## Circuit discovery experiments in language models
+Multi-linguality:
+- [On the Similarity of Circuits across Languages: a Case Study on the Subject-verb Agreement Task](https://arxiv.org/abs/2410.06496)
 
-- **Interpretability in the Wild: A Circuit for Indirect Object Identification in GPT-2 Small** (Wang et al., 2022, ICLR) ([paper](https://arxiv.org/abs/2211.00593))
-  - Highlight: Canonical end-to-end circuit case study: 26 attention heads grouped into 7 roles for the IOI task; showcases a full toolkit of patching/ablation evaluations, but also highlights gaps (residual unexplained loss, incomplete mechanisms).
+Multi-modality: 
+- [Same Task, Different Circuits: Disentangling
+Modality-Specific Mechanisms in VLMs](https://arxiv.org/pdf/2506.09047)
 
-- **How Does GPT-2 Compute Greater-Than? Interpreting Mathematical Abilities in a Pre-Trained Language Model** (Hanna, Liu, Variengien, NeurIPS 2024) ([paper](https://arxiv.org/abs/2305.00586))
-  - Highlight: Dissects a greater-than comparison circuit in GPT-2; strengthens the case that circuits can capture seemingly “abstract” reasoning, but also exposes how narrow and brittle some of these mechanisms are.
+Factual Recall: 
+- [Knowledge Circuits in Pretrained Transformers](https://arxiv.org/abs/2405.17969)
 
-- **Does Circuit Analysis Interpretability Scale? Evidence from Multiple Choice Capabilities in Chinchilla** (Lieberum et al., 2023) ([paper](https://arxiv.org/abs/2307.09458))
-  - Highlight: Scales circuit-style analysis for a large Chinchilla model; finds meaningful circuits but at substantial computational and human cost.
+- [How do LLMs acquire new knowledge? a knowledge circuits perspective on continual pre-training](https://arxiv.org/abs/2502.11196)
 
-- **Fine-Tuning Enhances Existing Mechanisms: A Case Study on Entity Tracking** (Prakash et al., 2024, ICLR) ([paper](https://arxiv.org/abs/2402.14811))
-  - Highlight: Tracks an entity-tracking circuit before and after fine-tuning on math; shows that fine-tuning mostly amplifies existing circuits rather than inventing new ones, and uses cross-model patching to compare mechanisms across checkpoints.
+- [Discovering Knowledge-Critical Subnetworks in Pretrained Language Models](https://arxiv.org/abs/2310.03084)
 
-- **Discovering Knowledge-Critical Subnetworks in Pretrained Language Models** (Bayazit et al., 2024, EMNLP) ([paper](https://arxiv.org/abs/2310.03084))
-  - Highlight: Uses differentiable masking to find sparse subnetworks that are critical for particular facts; conceptually close to circuits but operates on weights rather than activations, and demonstrates precise “knowledge deletion” with limited collateral damage.
+Answer extraction and attribution:
+- [On Mechanistic Circuits for Extractive Question-Answering](https://arxiv.org/pdf/2502.08059)
 
-- **On the Similarity of Circuits across Languages: a Case Study on the Subject-verb Agreement Task** ([paper](https://arxiv.org/abs/2410.06496))
-    - Highlight: Investigates a circuit for subject-verb agreement, and notes that it is highly language-agnostic. 
+Discourse Relations: 
+- [How Do Language Models Understand Discourse Relations? Discursive Circuits for Coherent Understanding of Discourse Relations](https://arxiv.org/abs/2510.11210)
 
-- **Knowledge Circuits in Pretrained Transformers** (Yao et al., 2024, NeurIPS) ([paper](https://arxiv.org/abs/2405.17969))
-  - Highlight: Explicitly identifies “knowledge circuits” spanning attention and MLPs for factual relations in GPT-2/TinyLLaMA, and studies how knowledge editing perturbs those circuits.
+## Compositionality and modularity
+> Preliminary results show that certain subcircuits are reused across tasks, while serving nearly the same purpose.
 
-- **How Do Language Models Understand Discourse Relations? Discursive Circuits for Coherent Understanding of Discourse Relations** (Miao et al., 2025) ([paper](https://arxiv.org/abs/2510.11210))
-    - Highight: Uses circuit ideas to study discourse-level behavior.
+- [Break It Down: Evidence for Structural Compositionality in Neural Networks](https://arxiv.org/abs/2301.10884)
 
----
+- [Circuit Component Reuse Across Tasks in Transformer Language Models](https://arxiv.org/abs/2310.08744)
 
-## Compositionality & modularity of circuits
+- [Circuit Compositions: Exploring Modular Structures in Transformer-Based Language Models](https://arxiv.org/abs/2410.01434)
 
-- **Break It Down: Evidence for Structural Compositionality in Neural Networks** (Lepori, Serre, Pavlick, 2023, NeurIPS) ([paper](https://arxiv.org/abs/2301.10884))
-  - Highlight: Prunes networks to find subnetworks implementing distinct subroutines across vision and language; shows that models often decompose tasks into modular pieces.
+- [Sheaf Discovery with Joint Computation Graph Pruning and Flexible Granularity](https://arxiv.org/pdf/2407.03779v2)
+  - Finds sheaf compositionality in GPT2-Small.
 
-- **Circuit Component Reuse Across Tasks in Transformer Language Models** (Merullo, Eickhoff, Pavlick, 2023/ICLR 2024) ([paper](https://arxiv.org/abs/2310.08744))
-  - Highlight: Takes the IOI circuit and shows it largely reappears for a different “Colored Objects” task and in larger GPT-2 models, providing strong evidence for component reuse across tasks.
+## Attention-specific capabilities
+> Certain capabilities can be isolated to specific attention heads, without concerning MLP layers. 
+  - Induction heads: [In-context Learning and Induction Heads](https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html)
+  - Successor heads: [Successor Heads: Recurring, Interpretable Attention Heads in the Wild](https://arxiv.org/pdf/2312.09230) 
+  - Entrainment heads: [Llama See, Llama Do: A Mechanistic Perspective on Contextual
+Entrainment and Distraction in LLMs](https://aclanthology.org/2025.acl-long.791.pdf)
+  - Attention head composition: [Talking Heads: Understanding Inter-layer Communication in Transformer Language Models](https://arxiv.org/abs/2406.09519)
 
-- **Circuit Compositions: Exploring Modular Structures in Transformer-Based Language Models** (Mondorf, 2024/ACL 2025) ([paper](https://arxiv.org/abs/2410.01434))
-  - Highlight: Uses probabilistic context-free grammars to elicit multiple string-edit subtasks and then compares the resulting circuits; gives a more formal treatment of how similar circuits are, how they compose, and where modularity breaks down.
-
----
-
-## Applications of circuits & causal subgraphs
-
-- **Sparse Feature Circuits: Discovering and Editing Interpretable Causal Graphs in Language Models** (Marks et al., 2024/ICLR 2025) ([paper](https://arxiv.org/abs/2403.19647))
-  - Highlight: Beyond discovery, this paper shows how feature-level circuits can be edited to debias classifiers by identifying irrelevant sparse circuits, thus helping to change model behavior.
-
-- **Discovering Knowledge-Critical Subnetworks in Pretrained Language Models** (Bayazit et al., 2024, EMNLP) ([paper](https://arxiv.org/abs/2310.03084))
-  - Highlight: Practical example of using subnetwork/circuit ideas to perform targeted knowledge removal while preserving most capabilities.
-
-- **On Mechanistic Circuits for Extractive Question-Answering** (Basu et. al. 2025, COLM) ([paper](https://arxiv.org/pdf/2502.08059))
-    - Highlight: Provides
-tangible applications of circuits in the form of
-reliable data attribution and model steering.
-
-- **How do LLMs acquire new knowledge? a knowledge circuits perspective on con-
-tinual pre-training** ([paper](https://arxiv.org/abs/2502.11196))
-    - Highlight: Investigates the evolution of knowledge circuits through pre-training, providing insights on improving pre-training strategies for better performance.
-
---- 
 ## Training interpretable models 
 
-- **Weight-sparse transformers have interpretable circuits** (Gao et. al. 2025) ([paper](https://arxiv.org/pdf/2511.13653))
-    - Highlight: Trains inherently sparse models and finds a capability-interpretability tradeoff in their circuits. Proposes mapping these activations over to dense models for mechanistic scaffolding. 
+- [Weight-sparse transformers have interpretable circuits](https://arxiv.org/pdf/2511.13653)
 
-## Helpful references
-### Courses for mechanistic interpretability
-
-- **Interpretability of Large Language Models, Tel Aviv University (Fall 2025)** ([link](https://github.com/mega002/llm-interp-tau))
-
+## Surveys 
+- Phenomenon-centric: [A Primer on the Inner Workings of Transformer-Based Language Models](https://arxiv.org/pdf/2405.00208)
+- Task-centric: [A Practical Review of Mechanistic Interpretability for Transformer-Based Language Models](https://arxiv.org/pdf/2407.02646)
+- Framework-centric: [The Quest for the Right Mediator: A History, Survey, and Theoretical Grounding of Causal Interpretability](https://arxiv.org/abs/2408.01416)
 
 
-
-
+## Dataset-centric analysis of circuit interpretability-focused papers
+|Dataset|Original Paper|Example Prompt| Correct Answer|
+|-----|-------|------|-----|
+|IOI|Wang et al., 2022| When Mary and John went to the store, John gave a drink to _ |Mary|
+|mathematical ordering|Hanna et al., 2023| The (noun) lasted from the year XXYY to the year XX__ |>YY|
+|entity tracking| Kim & Schuster, 2023| Box 0 contains the painting, Box 1 contains the bell, Box 2 contains the guitar, Box 3 contains the egg and the mirror and the sheet, Box 4 contains the chemical, Box 5 contains the disk and the wire, Box 6 contains the glass and the knife. Move the glass from Box 6 to Box 4. Put the gift into Box 5. Move the guitar from Box 2 to Box 6. Put the milk into Box 4. Re- move the mirror and the sheet from Box 3. Box 6 __|contains the guitar and the knife.|
+|relational knowledge| Hernandez et al., 2024|The official language of France is ___ | French| 
 
