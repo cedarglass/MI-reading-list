@@ -11,12 +11,7 @@
 
 ## Circuit Discovery Methods
 
-<<<<<<< HEAD
-- **The Quest for the Right Mediator: A History, Survey, and Theoretical Grounding of Causal Interpretability** (Mueller et al., 2024) ([paper](https://arxiv.org/abs/2408.01416))
-  - Highlight: Provides a broad overview on the methodology of causal interpretability, as well as the pros and cons of different interpretability frameworks (e.g. feature learning vs circuit discovery).
-=======
 ### Traditional Circuit Discovery
->>>>>>> d348a9d (updated reading list)
 
 - [Towards Automated Circuit Discovery for Mechanistic Interpretability (ACDC)](https://arxiv.org/abs/2304.14997)
 
@@ -42,28 +37,7 @@
 
 ### Sheaf Discovery: Combined Edge-Weight Pruning
 > Finds "sheaves" (edge & weight-pruned sets) with better task fidelity than traditional circuits.
-
-<<<<<<< HEAD
-- **Finding Transformer Circuits with Edge Pruning** (Bhaskar et al., 2024, NeurIPS) ([paper](https://arxiv.org/abs/2407.00886))
-  - Highlight: Optimizes a mask of edges to identify a sparse circuit that optimally reproduces model behaviour at a given sparsity. 
-
-- **Efficient Automated Circuit Discovery in Transformers using Contextual Decomposition (CD-T)** (Hsu et al., 2024) ([paper](https://arxiv.org/abs/2407.00886))
-  - Highlight: Attributes model outputs to contributions from specific input tokens and intermediate components, improving data efficiency and stability. 
-
-### 3. Sparse-feature / SAE-based circuit methods
-
-- **Sparse Feature Circuits: Discovering and Editing Interpretable Causal Graphs in Language Models** (Marks et al., 2024/ICLR 2025) ([paper](https://arxiv.org/abs/2403.19647))
-  - Highlight: Builds circuits over SAE features rather than neurons/heads, giving more monosemantic units and enabling edits like SHIFT (surgically removing spurious features).
-    - For an application, see **Scaling Sparse Feature Circuits For Studying In-Context Learning** ([paper](https://arxiv.org/pdf/2504.13756))
-
-- **Transcoders Find Interpretable LLM Feature Circuits** (Dunefsky et al., 2024) ([paper](https://arxiv.org/abs/2406.11944))
-    - Highlight: Transcoders learn the latent features of an MLP layer, together with a transformed weight matrix that encodes how these features activate one another. This allows circuit identification without patching or pruning. 
-    - see also: [Circuit Tracing: Revealing Computational Graphs in Language Models](https://transformer-circuits.pub/2025/attribution-graphs/methods.html)
-
----
-=======
 - [Sheaf Discovery with Joint Computation Graph Pruning and Flexible Granularity](https://arxiv.org/pdf/2407.03779v2)
->>>>>>> d348a9d (updated reading list)
 
 ## Faithfulness & critiques of circuit discovery
 
@@ -71,7 +45,7 @@
   - Finds that faithfulness metrics are sensitive to small changes in ablation methodology and task setups, calling into question the generalizability of discovered circuits.
 
 - [Have Faith in Faithfulness: Going Beyond Circuit Overlap When Finding Model Mechanisms](https://arxiv.org/abs/2403.17806)
-  -Argues that high overlap between discovered circuits and “ground truth” paths is not enough; compares different ablation/patching-style faithfulness tests and shows they can disagree.
+  - Argues that high overlap between discovered circuits and “ground truth” paths is not enough; compares different ablation/patching-style faithfulness tests and shows they can disagree.
 
 - [Rethinking Circuit Completeness in Language Models: AND, OR, and ADDER Gates](https://arxiv.org/abs/2505.10039)
   - Treats circuits as compositions of logical gates and shows that common methods systematically miss OR-like structures, which are important for applications such as unlearning and can be guaranteed through finding complete circuits.
